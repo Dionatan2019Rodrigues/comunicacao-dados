@@ -1,0 +1,118 @@
+
+
+:root {
+    --nearly-white: #F2F2F2;
+    --gray: #ADACAD;
+    --blue-1: #025E73;
+    --blue-2: #037F8C;
+    --orange: #F25C05;
+
+    --block-height: 50px;
+  }
+  /* Color Theme Swatches in Hex */
+  
+  
+  
+  
+
+
+
+
+/* .dash {
+    outline-style: solid;
+    outline-width: medium;
+} */
+
+
+.output *{
+    border-width: 1 1px 1px 1px;
+
+    border: solid;
+}
+
+.data_unit * {
+    background-color: var(--nearly-white);
+}
+
+.data_unit:first-child{
+    border-left: solid var(--blue-2) 4px;
+
+}
+
+.data_unit:last-child{
+    border-right: solid var(--blue-2) 4px;
+}
+
+.data_label {
+    text-align: center;
+    border-color: var(--blue-2);
+    border-style: solid;
+    border-width: medium;
+}
+
+
+.enfeite > *{
+    min-height: var(--block-height);
+    display: flex;
+}
+
+.enfeite .zero_line {
+    width: 100%;
+    text-align: right;
+    align-self: flex-end;
+    padding: 0px;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 6px;
+}
+
+
+.enfeite {
+    border-right: solid 4px black;
+}
+
+.zero_line p {
+    margin-bottom: 0px;
+}
+
+
+.data_unit_row_col {
+    width: 100%;
+    min-height: var(--block-height);
+    height: 100%;
+    border: 2px solid var(--gray);
+    border-width: 0 4px 4px 0;
+}
+
+
+.data_unit_row_col:last-child {
+    border-right: solid var(--blue-2) 4px;
+}
+
+
+
+.data_unit_row_col:first-child {
+    border-left: solid var(--blue-2) 4px;
+}
+
+.zero_line {
+    border-bottom: solid 4px black;
+}
+/* Indicadores de Sinal */
+
+.signal_right {
+    border-right: solid 4px var(--orange)!important;
+}
+
+
+.signal_left {
+    border-left: solid 4px var(--orange)!important;
+}
+
+.signal_top {
+    border-top: solid 4px var(--orange);
+}
+
+.signal_bottom {
+    border-bottom: solid 4px var(--orange);
+}
