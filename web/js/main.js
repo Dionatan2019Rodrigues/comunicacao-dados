@@ -1315,10 +1315,62 @@ function encodeMachesterDiff(data) {
     }
     return CL;
 }
+function encodeNRZ_L(data) {
+    let CL = {};
+    CL.data = [];
+    CL.signal = [];
+    CL.base_line = 1;
+    CL.sinal_level = 3;
+    CL.sinal_variation = 1;
+    CL.data_per_line = 18;
+    CL.start_level = 2;
+    for (let i = 0; i < data.length; i++) {
+        var signal = [];
+        if (data[i] == "0") {
+            signal.push(2);
+        }
+        else {
+            signal.push(0);
+        }
+        CL.data.push(data[i]);
+        CL.signal.push(signal);
+    }
+    return CL;
+}
+function encodeNRZ_I(data) {
+    let CL = {};
+    CL.data = [];
+    CL.signal = [];
+    CL.base_line = 1;
+    CL.sinal_level = 3;
+    CL.sinal_variation = 1;
+    CL.data_per_line = 18;
+    CL.start_level = 2;
+    var prev_level = CL.start_level;
+    for (let i = 0; i < data.length; i++) {
+        var signal = [];
+        if (data[i] == "0") {
+            signal.push(prev_level);
+        }
+        else {
+            if (prev_level == 2) {
+                signal.push(0);
+                prev_level = 0;
+            }
+            else {
+                signal.push(2);
+                prev_level = 2;
+            }
+        }
+        CL.data.push(data[i]);
+        CL.signal.push(signal);
+    }
+    return CL;
+}
 let div_output = document.getElementById("output");
 function encode(data) {
     div_output = document.getElementById("output");
-    var CL = encodeMachesterDiff(data);
+    var CL = encodeNRZ_I(data);
     generateView(CL, div_output);
 }
 //# sourceMappingURL=main.js.map
