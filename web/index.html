@@ -14,10 +14,10 @@
      <!-- Bootstrap CSS -->
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
  
-
-
+     
     <link rel="stylesheet" href="estilo.css">
     <link rel="stylesheet" href="signal_viewer.css">
+    <script src="./js/main.js"></script>
 
 </head>
 <body>
@@ -29,10 +29,10 @@
     <section>
         <div >
             <p> 
-                Área input dos bits <input type="number" id="num"> 
+                Área input dos bits <input type="text" id="num"> 
             </p>
             <p>Área para escolher qual codificação usar</p>
-            <p><input type="button" value="Adicionar" id="num" onclick="generateView(teste)"><!--Função JavaScript--></p>
+            <p><input type="button" value="Adicionar" id="num" onclick="encode(document.getElementById('num').value)"><!--Função JavaScript--></p>
         </div>
         <div id="output" class="conteiner d-grid gap-3">
             <p>Área que mostra o resultado</p>
@@ -57,7 +57,13 @@
     <footer>
         <p>&copy; Dionatan Rodrigues , João Vitor Belmonte e Karoline</p>
     </footer>
-    <script src="script.js"></script>
+
+    <!-- Talvez excluir -->
+    <!-- <script src="script.js"></script> -->
+
+    <!-- <script src="js/displaySignal.js"  type="module"></script>
+    <script src="js/8b6t.js" type="module"></script> -->
+    
     
 </body>
 </html>

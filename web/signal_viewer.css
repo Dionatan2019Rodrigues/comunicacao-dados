@@ -77,7 +77,7 @@
 
 
 .data_unit_row_col {
-    width: 100%;
+    width: var(--block-height)!important;
     min-height: var(--block-height);
     height: 100%;
     border: 2px solid var(--gray);
