@@ -11,8 +11,8 @@ section{
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.603);
     border-radius: 30px;
     padding: 15px;
-    margin: auto;
-    width: 80%;
+    margin: 10px;
+    width: 100%;
 }
 footer{
     color: white;
