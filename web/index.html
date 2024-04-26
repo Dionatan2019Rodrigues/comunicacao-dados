@@ -26,31 +26,45 @@
             Codificação de linhas 
         </h1>
     </header>
-    <section>
+    <section class="conteiner-fluid">
         <div >
-            <p> 
-                Área input dos bits <input type="text" id="num"> 
-            </p>
-            <p>Área para escolher qual codificação usar</p>
-            <p><input type="button" value="Adicionar" id="num" onclick="encode(document.getElementById('num').value)"><!--Função JavaScript--></p>
-        </div>
-        <div id="output" class="conteiner d-grid gap-3">
-            <p>Área que mostra o resultado</p>
+            
+            <form onsubmit="encode(document.getElementById('string_to_code').value, document.getElementById('select_encode').value) ; return false">
+          
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Codificação de Linha</label>
+                <select id="select_encode" class="form-control" id="exampleFormControlSelect1">
+                  <option value="8b6t">8B6T</option>
+                  <option value="NRL_L">NRL-L</option>
+                  <option value="NRZ_I">NRZ-I</option>
+                  <option value="MLT-3" disabled>MLT-3</option>
+                  <option value="Manchester">Manchester</option>
+                  <option value="ManchesterDiff">Manchester Diferencial</option>
+                  <option value="AMI" disabled>AMI</option>
+                  <option value="Pseudo_ternario" disabled>Pseudoternário</option>
+                  <option value="code3" disabled>Code 3</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Código:</label>
+                <textarea id="string_to_code" class="form-control" id="exampleFormControlTextarea1" rows="3">
+1100 0011  0101 1010 
+1111 1111  0000 0000
+1100 0011  1100 0011
+                </textarea>
+              </div>
+              
+              <div class="form-group my-2">
+              <button type="submit" class="btn btn-primary mb-2">Visualizar</button>
+              </div>
+            </form>
+
         </div>
 
-        <div class="container">
-            <div class="row">
-              <div class="col">
-                Column
-              </div>
-              <div class="col">
-                Column
-              </div>
-              <div class="col">
-                Column
-              </div>
-            </div>
-          </div>
+        <div id="output" class="conteiner d-grid gap-3">
+        </div>
+
 
 
     </section>
@@ -58,11 +72,8 @@
         <p>&copy; Dionatan Rodrigues , João Vitor Belmonte e Karoline</p>
     </footer>
 
-    <!-- Talvez excluir -->
-    <!-- <script src="script.js"></script> -->
-
-    <!-- <script src="js/displaySignal.js"  type="module"></script>
-    <script src="js/8b6t.js" type="module"></script> -->
+    
+    <script src="js/8b6t.js" type="module"></script> 
     
     
 </body>

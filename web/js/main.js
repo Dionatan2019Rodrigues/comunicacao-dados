@@ -1088,17 +1088,20 @@ function generateView(CL, div_output) {
         let enfeite_line = document.createElement("div");
         enfeite_line.classList.add("col-1");
         enfeite_line.classList.add("enfeite");
-        for (let index = 0; index < CL.sinal_level + 1; index++) {
+        //Linha dentro da linha, não sei descrever melhor :)
+        for (let index = 0; index < CL.sinal_level + 2; index++) {
             let tmp = document.createElement("div");
             tmp.classList.add("row");
             enfeite_line.prepend(tmp);
-            if (index == CL.base_line) {
+            if (index - 1 == CL.base_line) {
                 let tmp2 = document.createElement("div");
                 tmp2.classList.add("row");
                 tmp2.classList.add("zero_line");
                 tmp.append(tmp2);
                 tmp2.innerHTML = "<p>0</p>";
             }
+            // Classe Espço usperior inferior
+            tmp.id = "enfeite" + index;
         }
         //Create Line
         let signal_line = document.createElement("div");
@@ -1114,7 +1117,7 @@ function generateView(CL, div_output) {
             data_line.classList.add("data_unit");
             data_line.classList.add("dash");
             // Niveis de Linha
-            for (let index_sinal_level = 0; index_sinal_level < CL.sinal_level; index_sinal_level++) {
+            for (let index_sinal_level = -1; index_sinal_level < CL.sinal_level; index_sinal_level++) {
                 let data_line_row = document.createElement("div");
                 data_line_row.classList.add("row");
                 data_line_row.classList.add("data_unit_row");
@@ -1127,8 +1130,18 @@ function generateView(CL, div_output) {
                     data_line_row_col.classList.add("data_unit_row_col");
                     data_line_row_col.classList.add("dash");
                     data_line_row_col.id = index_line + ":" + index_data + ":" + index_sinal_level + ":" + index_sinal_var;
+                    // Classe Linha de Referencia
                     if (index_sinal_level == CL.base_line) {
                         data_line_row_col.classList.add("zero_line");
+                    }
+                    // Classe Espço usperior inferior
+                    if (index_sinal_level == -1) {
+                        data_line_row_col.classList.add("box_space");
+                        data_line_row_col.classList.add("bottom");
+                    }
+                    else if (index_sinal_level == (CL.sinal_level - 1)) {
+                        data_line_row_col.classList.add("box_space");
+                        data_line_row_col.classList.add("top");
                     }
                     data_line_row.append(data_line_row_col);
                 }
@@ -1149,7 +1162,7 @@ function generateView(CL, div_output) {
         wrapper_line.append(signal_line);
         div_output.appendChild(wrapper_line);
     }
-    // Desenhando lina de Sinal
+    // Desenhando linha de Sinal
     //Este loop e o anterior poderiam ser unidos, mas afim de facilitar para minha cabeça sonolenta vou fazer separado
     let prev_level = CL.start_level;
     let prev_id = '\0';
@@ -1368,9 +1381,43 @@ function encodeNRZ_I(data) {
     return CL;
 }
 let div_output = document.getElementById("output");
-function encode(data) {
+function encode(data, encode) {
     div_output = document.getElementById("output");
-    var CL = encodeNRZ_I(data);
-    generateView(CL, div_output);
+    var CL;
+    data = data.replace(/(\r\n|\n|\r| )/gm, "");
+    if (/^[01]+$/g.test(data)) {
+        switch (encode) {
+            case "8b6t":
+                CL = encode8b6t(data);
+                break;
+            case "NRZ_I":
+                CL = encodeNRZ_I(data);
+                break;
+            case "NRZ_L":
+                CL = encodeNRZ_L(data);
+                break;
+            case "Manchester":
+                CL = encodeMachester(data);
+                break;
+            case "ManchesterDiff":
+                CL = encodeMachesterDiff(data);
+                break;
+            case "MLT-3":
+                break;
+            case "AMI":
+                break;
+            case "Pseudo_ternario":
+                break;
+            case "code3":
+                break;
+            default:
+                break;
+        }
+        generateView(CL, div_output);
+    }
+    else {
+        var teste = document.getElementById("string_to_code");
+        teste.value = "Digite somente 0 e 1.";
+    }
 }
 //# sourceMappingURL=main.js.map

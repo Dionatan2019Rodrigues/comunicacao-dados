@@ -69,6 +69,7 @@
 
 .enfeite {
     border-right: solid 4px black;
+    width: 50px;
 }
 
 .zero_line p {
@@ -98,6 +99,27 @@
 .zero_line {
     border-bottom: solid 4px black;
 }
+
+.data_unit {
+    border-bottom: solid 4px var(--blue-2);
+}
+
+.data_unit_row_col.box_space, #enfeite3, #enfeite0 {
+    min-height: 35px!important;
+    max-height: 35px!important;
+    height: 35px!important;
+}
+
+ .box_space.top{
+    border-top: solid 4px var(--blue-2);
+}
+
+.box_space.bottom{
+ 
+    border-bottom: solid 4px var(--blue-2);
+
+}
+
 /* Indicadores de Sinal */
 
 .signal_right {
