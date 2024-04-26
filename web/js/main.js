@@ -1188,7 +1188,7 @@ function encode8b6t(data) {
     CL.base_line = 1;
     CL.sinal_level = 3;
     CL.sinal_variation = 6;
-    CL.data_per_line = 2;
+    CL.data_per_line = 3;
     var invert = false;
     for (let index = 0; index < data.length / 8; index++) {
         const data_slice = data.slice(index * 8, index * 8 + 8);
@@ -1252,10 +1252,33 @@ function encode8b6t(data) {
     }
     return CL;
 }
+function encodeMachester(data) {
+    let CL = {};
+    CL.data = [];
+    CL.signal = [];
+    CL.base_line = 1;
+    CL.sinal_level = 3;
+    CL.sinal_variation = 2;
+    CL.data_per_line = 9;
+    for (let i = 0; i < data.length; i++) {
+        var signal = [];
+        if (data[i] == "0") {
+            signal.push(2);
+            signal.push(0);
+        }
+        else {
+            signal.push(0);
+            signal.push(2);
+        }
+        CL.data.push(data[i]);
+        CL.signal.push(signal);
+    }
+    return CL;
+}
 let div_output = document.getElementById("output");
 function encode(data) {
     div_output = document.getElementById("output");
-    var CL = encode8b6t(data);
+    var CL = encodeMachester(data);
     generateView(CL, div_output);
 }
 //# sourceMappingURL=main.js.map

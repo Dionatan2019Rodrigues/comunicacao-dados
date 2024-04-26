@@ -1333,7 +1333,7 @@ function encode8b6t(data: String): codifiedLine {
     return CL;
 }
 
-function machester(data: String): codifiedLine {
+function encodeMachester(data: String): codifiedLine {
     
     
     let CL: codifiedLine = <codifiedLine>{};
@@ -1341,20 +1341,36 @@ function machester(data: String): codifiedLine {
     CL.signal = [];
     CL.base_line = 1;
     CL.sinal_level = 3;
-    CL.sinal_variation = 6;
-    CL.data_per_line = 3;
+    CL.sinal_variation = 2;
+    CL.data_per_line = 9;
+
+    for (let i = 0; i < data.length; i++) {
+        var signal: number[] = [];
+        if(data[i] == "0"){
+            signal.push(2);
+            signal.push(0);
+        } else {
+            signal.push(0);
+            signal.push(2);
+        }
+
+        CL.data.push(data[i]);
+        CL.signal.push(signal);
+        
+    }
 
 
-    
     return CL;
 }
+
+
 
 let div_output: HTMLElement = document.getElementById("output")
 
 function encode(data: String) {
     div_output = document.getElementById("output");
 
-    var CL: codifiedLine = encode8b6t(data);
+    var CL: codifiedLine = encodeMachester(data);
     generateView(CL, div_output);
 }
 
