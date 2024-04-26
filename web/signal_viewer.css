@@ -50,7 +50,9 @@
     border-width: medium;
 }
 
-
+.line {
+    padding-left: 0;
+}
 .enfeite > *{
     min-height: var(--block-height);
     display: flex;
@@ -61,7 +63,7 @@
     text-align: right;
     align-self: flex-end;
     padding: 0px;
-    margin-right: 0;
+    margin-right: -10px;
     margin-left: 0;
     margin-bottom: 6px;
 }
@@ -98,11 +100,18 @@
 
 .zero_line {
     border-bottom: solid 4px black;
+    
 }
 
 .data_unit {
     border-bottom: solid 4px var(--blue-2);
 }
+
+#output * {
+    background-color: var(--nearly-white);
+}
+
+
 
 .data_unit_row_col.box_space, #enfeite3, #enfeite0 {
     min-height: 35px!important;
