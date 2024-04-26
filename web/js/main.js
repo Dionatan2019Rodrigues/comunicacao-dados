@@ -1275,10 +1275,50 @@ function encodeMachester(data) {
     }
     return CL;
 }
+function encodeMachesterDiff(data) {
+    let CL = {};
+    CL.data = [];
+    CL.signal = [];
+    CL.base_line = 1;
+    CL.sinal_level = 3;
+    CL.sinal_variation = 2;
+    CL.data_per_line = 9;
+    CL.start_level = 2;
+    var prev_state = 2;
+    for (let i = 0; i < data.length; i++) {
+        var signal = [];
+        if (data[i] == "0") {
+            if (prev_state == 2) {
+                signal.push(0);
+                signal.push(2);
+                prev_state = 2; // Acho que nem precisava
+            }
+            else {
+                signal.push(2);
+                signal.push(0);
+                prev_state = 0;
+            }
+        }
+        else {
+            signal.push(prev_state);
+            if (prev_state == 2) {
+                signal.push(0);
+                prev_state = 0;
+            }
+            else {
+                signal.push(2);
+                prev_state = 2;
+            }
+        }
+        CL.data.push(data[i]);
+        CL.signal.push(signal);
+    }
+    return CL;
+}
 let div_output = document.getElementById("output");
 function encode(data) {
     div_output = document.getElementById("output");
-    var CL = encodeMachester(data);
+    var CL = encodeMachesterDiff(data);
     generateView(CL, div_output);
 }
 //# sourceMappingURL=main.js.map
