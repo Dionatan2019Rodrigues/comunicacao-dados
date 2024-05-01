@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codificação de linhas</title>
+    <title>Codificações de Linha</title>
     
     <!-- BOOTSTRAP -->
      <!-- Required meta tags -->
@@ -23,7 +23,7 @@
 <body>
     <header>
         <h1>
-            Codificação de linhas 
+          Codificações de Linha
         </h1>
     </header>
     <section class="conteiner-fluid">
@@ -32,19 +32,25 @@
             <form onsubmit="encode(document.getElementById('string_to_code').value, document.getElementById('select_encode').value) ; return false">
           
               <div class="form-group">
-                <label for="exampleFormControlSelect1">Codificação de Linha</label>
+                <label for="exampleFormControlSelect1">Codificações de Linha</label>
                 <select id="select_encode" class="form-control" id="exampleFormControlSelect1">
-                  <option value="8b6t">8B6T</option>
-                  <option value="MLT-3">MLT-3</option>
-                  <option value="4dpam5">4dpam5</option>
-                  <option value="vazio" disabled></option>
-                  <option value="NRZ_L">NRZ-L</option>
-                  <option value="NRZ_I">NRZ-I</option>
-                  <option value="Manchester">Manchester</option>
-                  <option value="ManchesterDiff">Manchester Diferencial</option>
-                  <option value="AMI">AMI</option>
-                  <option value="Pseudo_ternario">Pseudoternário</option>
-                  
+                  <optgroup label="Polar">
+                    <option value="NRZ_L">NRZ-L</option>
+                    <option value="NRZ_I">NRZ-I</option>
+                    <option value="Manchester">Manchester</option>
+                    <option value="ManchesterDiff">Manchester Diferencial</option>
+                  </optgroup>
+                  <optgroup label="Bipolar">
+                    <option value="AMI">AMI</option>
+                    <option value="Pseudo_ternario">Pseudoternário</option>
+                  </optgroup>
+                  <optgroup label="Multinível">
+                    <option value="8b6t">8B6T</option>
+                    <option value="4dpam5">4D-PAM5</option>
+                  </optgroup>
+                  <optgroup label="Multitransição">
+                    <option value="MLT-3">MLT-3</option>
+                  </optgroup>                
                 </select>
               </div>
               

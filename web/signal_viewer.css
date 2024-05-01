@@ -68,6 +68,13 @@
     margin-bottom: 6px;
 }
 
+#output > .row{
+    border: solid 1px var(--gray);
+}
+
+.col.row.line {
+    margin-right: 0px!important;
+}
 
 .enfeite {
     border-right: solid 4px black;
