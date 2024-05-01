@@ -1,8 +1,8 @@
 body{
-    background-color: blueviolet;
+    background-color: rgba(81, 30, 129, 0.733);
     font: normal 15pt Arial;
 }
-header{
+header{ 
     text-align: center;
     color: white;
 }

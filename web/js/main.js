@@ -1026,6 +1026,7 @@ let json8bt6 = {
         }
     ]
 };
+
 let teste = {
     sinal_level: 4,
     sinal_variation: 2,
@@ -1035,6 +1036,7 @@ let teste = {
     data_per_line: 2,
     start_level: 1
 };
+
 function verticalSignal(from, to, from_str) {
     let position = to.split(":");
     let level = parseInt(position[2]);
@@ -1078,6 +1080,7 @@ function verticalSignal(from, to, from_str) {
         }
     }
 }
+
 function generateView(CL, div_output) {
     var _a;
     div_output.innerHTML = "";
@@ -1190,6 +1193,7 @@ function generateView(CL, div_output) {
         }
     }
 }
+
 function encode8b6t(data) {
     //Completando com 0 para fechar 8 bits
     if (data.length % 8 != 0) {
@@ -1265,6 +1269,7 @@ function encode8b6t(data) {
     }
     return CL;
 }
+
 function encodeMachester(data) {
     let CL = {};
     CL.data = [];
@@ -1288,6 +1293,7 @@ function encodeMachester(data) {
     }
     return CL;
 }
+
 function encodeMachesterDiff(data) {
     let CL = {};
     CL.data = [];
@@ -1328,6 +1334,7 @@ function encodeMachesterDiff(data) {
     }
     return CL;
 }
+
 function encodeNRZ_L(data) {
     let CL = {};
     CL.data = [];
@@ -1350,6 +1357,7 @@ function encodeNRZ_L(data) {
     }
     return CL;
 }
+
 function encodeNRZ_I(data) {
     let CL = {};
     CL.data = [];
@@ -1380,7 +1388,163 @@ function encodeNRZ_I(data) {
     }
     return CL;
 }
+
+function encodeMlt3(data){
+    let CL = {};
+    CL.data = [];
+    CL.signal = [];
+    CL.base_line = 1;
+    CL.sinal_level = 3;
+    CL.sinal_variation = 1;
+    CL.data_per_line = 18;
+    CL.start_level = 1;
+    var prev_level = 1;
+    let flag = false;
+    for (let i = 0; i < data.length; i++) {
+        var signal = [];
+        if (data[i] == "0") {
+            signal.push(prev_level);
+        }
+        else {
+            if (prev_level == 2) {
+                signal.push(1);
+                prev_level = 1;
+            }else if (prev_level == 0) {
+                signal.push(1);
+                prev_level = 1;
+            }else {
+                if(flag){
+                    signal.push(0);
+                    prev_level = 0;
+                    flag = false;
+                }else{
+                    signal.push(2);
+                    prev_level = 2;
+                    flag = true;
+                }
+                
+            }
+            /*if (prev_level == 2) {
+                signal.push(1);
+                prev_level = 0;
+            }
+            else {
+                signal.push(2);
+                prev_level = 2;
+            }*/
+        }
+        CL.data.push(data[i]);
+        CL.signal.push(signal);
+    }
+    return CL;
+}   
+
+function encodeAmi(data){
+    let CL = {};
+    CL.data = [];
+    CL.signal = [];
+    CL.base_line = 1;
+    CL.sinal_level = 3;
+    CL.sinal_variation = 1;
+    CL.data_per_line = 18;
+    CL.start_level = 1;
+    var prev_level = CL.start_level;
+    for (let i = 0; i < data.length; i++) {
+        var signal = [];
+        if (data[i] == "0") {
+            signal.push(1);
+        }
+        else {
+            if (prev_level == 2) {
+                signal.push(0);
+                prev_level = 0;
+            }
+            else {
+                signal.push(2);
+                prev_level = 2;
+            }
+        }
+        CL.data.push(data[i]);
+        CL.signal.push(signal);
+    }
+    return CL;
+}
+
+function encondePseudo(data){
+    let CL = {};
+    CL.data = [];
+    CL.signal = [];
+    CL.base_line = 1;
+    CL.sinal_level = 3;
+    CL.sinal_variation = 1;
+    CL.data_per_line = 18;
+    CL.start_level = 0;
+    var prev_level = CL.start_level;
+    for (let i = 0; i < data.length; i++) {
+        var signal = [];
+        if (data[i] == "1") {
+            signal.push(1);
+        }
+        else {
+            if (prev_level == 2) {
+                signal.push(0);
+                prev_level = 0;
+            }
+            else {
+                signal.push(2);
+                prev_level = 2;
+            }
+        }
+        CL.data.push(data[i]);
+        CL.signal.push(signal);
+    }
+    return CL;
+}
+
+function encode4dpam5(data) {
+    //Completando com 0 para fechar 8 bits
+    if (data.length % 8 != 0) {
+        data += "0".repeat(8 - data.length % 8);
+    }
+    let CL = {};
+    CL.data = [];
+    CL.signal = [];
+    CL.base_line = 2;
+    CL.sinal_level = 5;
+    CL.sinal_variation = 4;
+    CL.data_per_line = 4;
+    CL.start_level = 2;
+    var invert = false;
+    for (let index = 0; index < data.length / 8; index++) {
+        const data_slice = data.slice(index * 8, index * 8 + 8);
+        CL.data.push(data_slice);
+        let signal = [];
+        for (let index2 = 0; index2 < 4; index2++) {
+            let data_slice2 = data_slice.slice(index2 * 2, index2 * 2 + 2);
+            var value = parseInt(data_slice2, 2);
+            switch (value) {
+                case 0:
+                    signal.push(0);
+                    break;
+                case 1:
+                    signal.push(1);
+                    break;
+                case 2:
+                    signal.push(3);
+                    break;
+                case 3:
+                    signal.push(4);
+                default:
+                    break;
+            }
+        }
+        CL.signal.push(signal);
+    }
+    return CL;
+}
+
 let div_output = document.getElementById("output");
+
 function encode(data, encode) {
     div_output = document.getElementById("output");
     var CL;
@@ -1403,12 +1567,16 @@ function encode(data, encode) {
                 CL = encodeMachesterDiff(data);
                 break;
             case "MLT-3":
+                CL = encodeMlt3(data);
                 break;
             case "AMI":
+                CL = encodeAmi(data);
                 break;
             case "Pseudo_ternario":
+                CL = encondePseudo(data);
                 break;
-            case "code3":
+            case "4dpam5":
+                CL = encode4dpam5(data);
                 break;
             default:
                 break;

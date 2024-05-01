@@ -10,6 +10,7 @@ var teste = {
     data_per_line: 2, // Quantos dados serão codificados por linha
     start_level: 1 //Nivel de sinal inicial
 };
+
 function verticalSignal(from, to, from_str) {
     var position = to.split(":");
     var level = parseInt(position[2]);
@@ -53,6 +54,7 @@ function verticalSignal(from, to, from_str) {
         }
     }
 }
+
 function generateView(CL) {
     div_output.innerHTML = "";
     //Linhas  || Criando GRIDS

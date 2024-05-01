@@ -1493,8 +1493,6 @@ function encodeNRZ_I(data: String): codifiedLine {
     return CL;
 }
 
-
-
 let div_output: HTMLElement = document.getElementById("output")
 
 

@@ -178,7 +178,6 @@ function generateView(CL: codifiedLine): void {
 
         }
 
-
         wrapper_line.append(enfeite_line);
         wrapper_line.append(signal_line);
         div_output.appendChild(wrapper_line)
